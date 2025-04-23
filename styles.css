@@ -496,7 +496,7 @@ nav ul li a:hover {
   border-color: var(--primary);
 }
 .email {
-  font-size: small;
+  overflow-wrap: anywhere;
 }
 
 /* Footer */
