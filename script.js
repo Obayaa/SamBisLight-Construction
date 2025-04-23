@@ -293,25 +293,25 @@ document.addEventListener('DOMContentLoaded', function () {
     setInterval(nextSlide, 5000);
 
     // Project Filtering
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const projectCards = document.querySelectorAll('.project-card');
+    document.querySelectorAll('.projects').forEach(section => {
+        const filterBtns = section.querySelectorAll('.filter-btn');
+        const projectCards = section.querySelectorAll('.project-card');
 
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function () {
-            // Remove active class from all buttons
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            // Add active class to clicked button
-            this.classList.add('active');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                // Remove active class from all buttons in this section
+                filterBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
 
-            const filter = this.getAttribute('data-filter');
+                const filter = this.getAttribute('data-filter');
 
-            // Filter projects
-            projectCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                projectCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
             });
         });
     });
