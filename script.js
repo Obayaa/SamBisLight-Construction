@@ -266,9 +266,17 @@ document.head.appendChild(style);
 document.addEventListener('DOMContentLoaded', function () {
     const mobileMenu = document.querySelector('.mobile-menu');
     const navMenu = document.getElementById('nav-menu');
+    const navLinks = document.querySelectorAll('#nav-menu a');
+
 
     mobileMenu.addEventListener('click', function () {
-        navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        navMenu.classList.toggle('open');
+    });
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('open');
+        });
     });
 
     // Hero Slider
