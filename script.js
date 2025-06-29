@@ -121,14 +121,12 @@ function createParticleCanvas() {
     });
 }
 
-// Uncommment to enable particles
 createParticleCanvas();
 
 document.addEventListener('DOMContentLoaded', function () {
     // Initialize animations
     initAnimations();
 
-    // Check for animations on scroll
     window.addEventListener('scroll', function () {
         initAnimations();
     });
@@ -346,6 +344,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+ 
+
     // Open modal on project click
     projectCards.forEach(card => {
         card.addEventListener('click', function () {
@@ -353,11 +353,14 @@ document.addEventListener('DOMContentLoaded', function () {
             const location = this.querySelector('p').textContent;
             const img = this.querySelector('img').src;
 
-            // Populate modal content
+            // Populate modal content with new structure
             modalContent.innerHTML = `
+            <div class="modal-image-container">
+                <img src="${img}" alt="${title}">
+            </div>
+            <div class="modal-text-content">
                 <h2>${title}</h2>
                 <p><strong>Location:</strong> ${location}</p>
-                <img src="${img}" alt="${title}" style="width: 70%; height: 50%; border-radius: 10px; margin: 20px 0;">
                 <p>This is a detailed description of the project. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                 <div style="margin-top: 20px;">
                     <h3>Project Details</h3>
@@ -369,7 +372,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     </ul>
                 </div>
                 <a href="#contact" class="btn" style="margin-top: 20px;">Inquire About This Project</a>
-            `;
+            </div>
+        `;
 
             // Show modal
             modal.classList.add('active');
@@ -377,11 +381,13 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // Close modal when clicking close button or outside modal
-    closeModal.addEventListener('click', function () {
-        modal.classList.remove('active');
-        toggleBodyScroll(false);
-    });
+    // Don't forget to handle closing the modal
+    if (closeModal) {
+        closeModal.addEventListener('click', function () {
+            modal.classList.remove('active');
+            toggleBodyScroll(false);
+        });
+    }
 
     window.addEventListener('click', function (event) {
         if (event.target === modal) {
